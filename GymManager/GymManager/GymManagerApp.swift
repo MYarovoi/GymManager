@@ -24,7 +24,7 @@ struct GymManagerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(AuthViewModel.shared)
         }
     }
 }
