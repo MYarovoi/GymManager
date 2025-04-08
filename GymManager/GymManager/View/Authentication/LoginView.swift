@@ -16,12 +16,12 @@ struct LoginView: View {
         NavigationStack {
             ZStack {
                 VStack {
-                    Image("TwitterLogo")
+                    Image("phoenix")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 220, height: 100)
-                        .padding(.top, 88)
-                        .padding(.bottom, 32)
+                        .padding(.top, 120)
+                        .padding(.bottom, 50)
                     
                     VStack(spacing: 20) {
                         CustomTextField(text: $email, placeholder: "Email", imageName: "envelope")
@@ -44,7 +44,7 @@ struct LoginView: View {
                         Button {
                             
                         } label: {
-                            Text("Forgot Password?")
+                            Text("Забув пароль?")
                                 .font(.footnote)
                                 .foregroundStyle(.white)
                                 .bold()
@@ -59,7 +59,7 @@ struct LoginView: View {
                             try await viewModel.login(email: email, password: password)
                         }
                     } label: {
-                        Text("Sign In")
+                        Text("Увійти")
                             .font(.headline)
                             .foregroundStyle(.blue)
                             .frame(width: 360, height: 50)
@@ -74,10 +74,10 @@ struct LoginView: View {
                         RegistrationView().navigationBarBackButtonHidden()
                     } label: {
                         HStack {
-                            Text("Don't have an account?")
+                            Text("Немає профілю?")
                                 .font(.system(size: 14))
                             
-                            Text("Sign Up")
+                            Text("Створити")
                                 .font(.system(size: 14,weight: .semibold))
                         }
                         .foregroundStyle(.white)
@@ -86,7 +86,7 @@ struct LoginView: View {
 
                 }
             }
-            .background(Color(red: 47 / 255, green: 161 / 255, blue: 243 / 255))
+            .background(Color(ThemeColors.darkBlue))
             .ignoresSafeArea()
         }
     }

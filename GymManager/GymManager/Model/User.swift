@@ -11,9 +11,9 @@ struct User: Identifiable, Codable {
     let id: String
     let fullName: String
     let email: String
-    var isAdmin: Bool = false
-    let dateOfBirth: Date
+    var isAdmin: Bool 
+    let dateOfBirth: Date?
     let dateOfRegistration: Date
-    var dateofLastPayment: Date?
+    var dateOfLastPayment: Date?
     var profileImageURL: String? = "person.crop.circle"
 }
