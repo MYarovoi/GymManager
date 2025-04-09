@@ -41,30 +41,35 @@ struct DetailListView: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.members) { member in
-                MemberCell(member: member)
+            ForEach(search.isEmpty ? viewModel.members : viewModel.filteredUsers(search)) { member in
+                NavigationLink(value: member) {
+                    MemberCell(member: member)
+                }
             }.onDelete { offsets in
                 Task {
                     await deleteUser(offsets)
                 }
             }
         }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(list.listName)
-                        .font(.headline)
-                        .foregroundStyle(Color(ThemeColors.coral))
-                }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(list.listName)
+                    .font(.headline)
                     .foregroundStyle(Color(ThemeColors.coral))
-                }
             }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .foregroundStyle(Color(ThemeColors.coral))
+            }
+        }
+        .navigationDestination(for: Member.self) { member in
+            ProfileView(member: member)
+        }
         .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
     }
 }

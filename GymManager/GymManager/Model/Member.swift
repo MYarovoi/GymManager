@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Member: Identifiable, Codable {
+struct Member: Identifiable, Codable, Hashable {
     let id: String
     let fullName: String
     let email: String
@@ -25,4 +25,21 @@ extension Member {
         }
         return dob.toDayMonthYearString()
     }
+    
+    static let MOCK_USER: Member = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dor = formatter.date(from: "2025-04-08")!
+        let dob = formatter.date(from: "1996-09-13")!
+        let dolp = formatter.date(from: "2025-03-10")!
+            return Member(
+                id: "",
+                fullName: "Mykyta Yarovoi",
+                email: "MykytaYarovoi@gmail.com",
+                isAdmin: false,
+                dateOfBirth: dob,
+                dateOfRegistration: dor,
+                dateOfLastPayment: dolp
+            )
+        }()
 }

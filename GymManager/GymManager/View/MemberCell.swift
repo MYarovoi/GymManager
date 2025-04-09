@@ -50,26 +50,6 @@ struct MemberCell: View {
 
 #Preview {
     MemberCell(
-        member: Member(
-            id: "",
-            fullName: "Mykyta Yarovoi",
-            email: "MykytaYarovoi@gmail.com",
-            isAdmin: false,
-            dateOfBirth: {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                return formatter.date(from: "2025-04-08")!
-            }(),
-            dateOfRegistration: {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                return formatter.date(from: "2025-04-08")!
-            }(),
-            dateOfLastPayment: {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                return formatter.date(from: "2025-04-08")!
-            }()
-        )
+        member: Member.MOCK_USER
     )
 }

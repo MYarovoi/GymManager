@@ -21,6 +21,13 @@ class DetailListViewModel: ObservableObject {
         }
     }
     
+    func filteredUsers(_ query: String) -> [Member] {
+        let lowercasedQuery = query.lowercased()
+        return members.filter({
+            $0.fullName.lowercased().contains(lowercasedQuery)
+        })
+    }
+    
     func fetchMembers(link: CollectionReference) async throws {
         do {
             let snapshot = try await link.getDocuments()
