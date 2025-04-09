@@ -11,7 +11,7 @@ import Firebase
 @MainActor
 class DetailListViewModel: ObservableObject {
     var link: CollectionReference
-    @Published var members = [User]()
+    @Published var members = [Member]()
     
     init(link: CollectionReference) {
         self.link = link
@@ -24,9 +24,7 @@ class DetailListViewModel: ObservableObject {
     func fetchMembers(link: CollectionReference) async throws {
         do {
             let snapshot = try await link.getDocuments()
-            print(snapshot)
-            members = snapshot.documents.compactMap { try? $0.data(as: User.self) }
-            print(members)
+            members = snapshot.documents.compactMap { try? $0.data(as: Member.self) }
         } catch {
             print("DEBUG: Error fetching members \(error.localizedDescription)")
         }

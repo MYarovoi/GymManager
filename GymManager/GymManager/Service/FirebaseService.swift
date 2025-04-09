@@ -10,11 +10,11 @@ import FirebaseAuth
 import FirebaseFirestore
 
 @MainActor
-class AuthViewModel: ObservableObject {
+class FirebaseService: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
-    @Published var user: User?
+    @Published var user: Member?
     
-    static let shared = AuthViewModel()
+    static let shared = FirebaseService()
     
     init() {
         userSession = Auth.auth().currentUser
@@ -73,10 +73,15 @@ class AuthViewModel: ObservableObject {
         do {
             let snapshot = try await COLLECTION_ALL_USERS.document("allClubMembers").collection("allClubMembersCollection").document(uid).getDocument()
             
-            let user = try snapshot.data(as: User.self)
+            let user = try snapshot.data(as: Member.self)
             self.user = user
         } catch {
             print("DEBUG: Error fetching user: \(error.localizedDescription)")
         }
+    }
+    
+    func deleteUser(_ from: CollectionReference, id: String) async throws {
+        let userRef = from.document(id)
+        try await userRef.delete()
     }
 }

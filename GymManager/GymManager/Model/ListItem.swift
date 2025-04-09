@@ -16,7 +16,7 @@ struct ListItem: Codable, Identifiable, Hashable {
             case "allClubMembers":
             return "Загальний список клубу"
         case "paidMembership":
-            return "Сплачені абонементи на місяц"
+            return "Сплачені абонементи на місяць"
         default:
             return id ?? ""
         }

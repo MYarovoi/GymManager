@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State var email = ""
     @State var password = ""
-    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var viewModel: FirebaseService
     
     var body: some View {
         NavigationStack {

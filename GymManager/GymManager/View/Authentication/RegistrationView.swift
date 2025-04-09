@@ -15,7 +15,7 @@ struct RegistrationView: View {
     @State var selectedUIImage: UIImage?
     @State var image: Image?
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var viewModel: FirebaseService
     
     func loadImage() {
         guard let selectedUIImage = selectedUIImage else { return }

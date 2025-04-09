@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var viewModel: FirebaseService
     @State private var selectedIndex: Int = 0
     
     private var titleForIndex: String {

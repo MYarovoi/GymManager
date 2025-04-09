@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Identifiable, Codable {
+struct Member: Identifiable, Codable {
     let id: String
     let fullName: String
     let email: String
@@ -15,5 +15,14 @@ struct User: Identifiable, Codable {
     let dateOfBirth: Date?
     let dateOfRegistration: Date
     var dateOfLastPayment: Date?
-    var profileImageURL: String? = "person.crop.circle"
+    var profileImageURL: String?
+}
+
+extension Member {
+    var dateOfBirthString: String {
+        guard let dob = dateOfBirth else {
+            return "-"
+        }
+        return dob.toDayMonthYearString()
+    }
 }
