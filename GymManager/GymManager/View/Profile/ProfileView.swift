@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var viewModel: FirebaseService
     @State var member: Member
     
     var body: some View {
@@ -31,29 +32,32 @@ struct ProfileView: View {
             
             Text("Абонемент дійсний до: 21.04.2025")
                 .font(.subheadline)
-                .padding(.leading)
+                .padding(.horizontal)
             
-            HStack {
-                Button("Редагувати профіль") {
-                    
-                }
-                .frame(width: 180, height: 45)
-                .foregroundStyle(Color(.white))
-                .background(Color(ThemeColors.coral))
-                .font(.system(size: 15, weight: .semibold))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                
-                Button("Придбати абонемент") {
-                    
-                }
-                .frame(width: 180, height: 45)
-                .foregroundStyle(Color(.white))
-                .background(Color(ThemeColors.coral))
-                .font(.system(size: 15, weight: .semibold))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-            } .padding(.horizontal)
+            ProfileActionButtonView(viewModel: ProfileViewModel(member: member))
             
             Spacer()
+        }
+        .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Профіль")
+                        .font(.headline)
+                        .foregroundStyle(Color(ThemeColors.coral))
+                    
+                    Button {
+                        Task {
+                            try viewModel.signOut()
+                        }
+                    } label: {
+                        Image(systemName: "rectangle.portrait.and.arrow.forward")
+                            .resizable()
+                            .scaledToFill()
+                            .clipped()
+                            .frame(width: 28, height: 28)
+                            .padding(.leading)
+                            .foregroundStyle(Color(ThemeColors.coral))
+                    }
+                }
         }
     }
 }

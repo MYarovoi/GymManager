@@ -17,6 +17,14 @@ struct ListMenuView: View {
                     Text(list.listName)
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Списки клубу")
+                        .font(.headline)
+                        .foregroundStyle(Color(ThemeColors.coral))
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: ListItem.self) { list in
                 DetailListView(list: list)
             }

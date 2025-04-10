@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 struct Member: Identifiable, Codable, Hashable {
     let id: String
@@ -16,6 +17,10 @@ struct Member: Identifiable, Codable, Hashable {
     let dateOfRegistration: Date
     var dateOfLastPayment: Date?
     var profileImageURL: String?
+    var isCurrentUser: Bool {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return false }
+        return currentUid == id
+    }
 }
 
 extension Member {
