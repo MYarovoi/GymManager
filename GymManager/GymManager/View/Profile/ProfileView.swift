@@ -52,15 +52,17 @@ struct ProfileView: View {
                     .foregroundStyle(Color(ThemeColors.coral))
             }
             
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    Task { try viewModel.signOut() }
-                } label: {
-                    Image(systemName: "rectangle.portrait.and.arrow.forward")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 28, height: 28)
-                        .foregroundStyle(Color(ThemeColors.coral))
+            if member.isCurrentUser {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        Task { try viewModel.signOut() }
+                    } label: {
+                        Image(systemName: "rectangle.portrait.and.arrow.forward")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 28, height: 28)
+                            .foregroundStyle(Color(ThemeColors.coral))
+                    }
                 }
             }
         }

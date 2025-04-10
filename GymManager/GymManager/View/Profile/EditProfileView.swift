@@ -23,15 +23,30 @@ struct EditProfileView: View {
     }
     
     var body: some View {
-        VStack {
-            TextField("Повне ім'я", text: $fullName)
+        VStack(alignment: .center) {
+            Image(systemName: "person.circle")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 180, height: 180)
+                .padding(.top, 20)
+                .padding(.bottom, 30)
+            
+            CustomEditProfileTextField(title: "ПІБ", text: $fullName)
+            CustomDatePickerView(title: "Дата народження:", selection: $dateOfBirth)
+            CustomDatePickerView(title: "Дата встпу до клубу:", selection: $dateOfRegistration)
+
+            
+            Spacer()
         }
+        .padding(.horizontal)
         .toolbar{
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     Task {
                         var updatedMember = member
                         updatedMember.fullName = fullName
+                        updatedMember.dateOfBirth = dateOfBirth
+                        updatedMember.dateOfRegistration = dateOfRegistration
                         await viewModel.updateMember(member: updatedMember)
                         
                         member = updatedMember
