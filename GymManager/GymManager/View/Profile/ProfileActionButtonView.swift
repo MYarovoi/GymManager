@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ProfileActionButtonView: View {
     @ObservedObject var viewModel: ProfileViewModel
+    @Binding var isPresented: Bool
     
     var body: some View {
             if viewModel.member.isCurrentUser {
                     HStack {
                         Button("Редагувати профіль") {
-                            
+                            isPresented.toggle()
                         }
                         .frame(width: 180, height: 45)
                         .foregroundStyle(Color(.white))

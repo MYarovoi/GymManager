@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var viewModel: FirebaseService
     @State var member: Member
+    @State private var isEditPresented = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -34,30 +35,34 @@ struct ProfileView: View {
                 .font(.subheadline)
                 .padding(.horizontal)
             
-            ProfileActionButtonView(viewModel: ProfileViewModel(member: member))
+            ProfileActionButtonView(viewModel: ProfileViewModel(member: member), isPresented: $isEditPresented)
             
             Spacer()
         }
+        .sheet(isPresented: $isEditPresented, content: {
+            NavigationStack {
+                EditProfileView(member: $member)
+                                .environmentObject(viewModel)
+            }
+        })
         .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Профіль")
-                        .font(.headline)
+            ToolbarItem(placement: .principal) {
+                Text("Профіль")
+                    .font(.headline)
+                    .foregroundStyle(Color(ThemeColors.coral))
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    Task { try viewModel.signOut() }
+                } label: {
+                    Image(systemName: "rectangle.portrait.and.arrow.forward")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 28, height: 28)
                         .foregroundStyle(Color(ThemeColors.coral))
-                    
-                    Button {
-                        Task {
-                            try viewModel.signOut()
-                        }
-                    } label: {
-                        Image(systemName: "rectangle.portrait.and.arrow.forward")
-                            .resizable()
-                            .scaledToFill()
-                            .clipped()
-                            .frame(width: 28, height: 28)
-                            .padding(.leading)
-                            .foregroundStyle(Color(ThemeColors.coral))
-                    }
                 }
+            }
         }
     }
 }

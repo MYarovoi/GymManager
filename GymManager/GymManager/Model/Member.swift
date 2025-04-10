@@ -10,11 +10,11 @@ import FirebaseAuth
 
 struct Member: Identifiable, Codable, Hashable {
     let id: String
-    let fullName: String
+    var fullName: String
     let email: String
-    var isAdmin: Bool 
-    let dateOfBirth: Date?
-    let dateOfRegistration: Date
+    var isAdmin: Bool
+    var dateOfBirth: Date?
+    var dateOfRegistration: Date
     var dateOfLastPayment: Date?
     var profileImageURL: String?
     var isCurrentUser: Bool {

@@ -56,6 +56,16 @@ class FirebaseService: ObservableObject {
         }
     }
     
+    func updateMember(member: Member) async {
+        do {
+            let ref = COLLECTION_ALL_USERS.document("allClubMembers").collection("allClubMembersCollection").document(member.id)
+            try ref.setData(from: member)
+        } catch {
+            print("DEBUG: Error updating member: \(error.localizedDescription)")
+        }
+    }
+        
+    
     func signOut() throws {
         userSession = nil
         user = nil
